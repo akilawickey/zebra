@@ -1,0 +1,90 @@
+{
+    "DefViews": {
+        "cellBackground": "orange",
+        "font": "13px 'Lucida Grande', 'Lucida Sans', Arial, sans-serif",
+        "color": "rgb(74,74,74)"
+    },
+
+    "DefEditors" : {
+        "TextField": {
+            "inheritProperties" : true,
+            "background": null
+        },
+
+        "Combo": {
+            "inheritProperties" : true,
+            "border":null
+        },
+
+        "Checkbox": {
+            "inheritProperties" : true,
+            "layout": { "@zebkit.layout.FlowLayout": [ "center", "center" ]},
+            "border": {"@zebkit.draw.Border":  "blue" }
+        }
+    },
+
+    "BaseCaption": {
+        "background" : { "@zebkit.draw.Gradient": [ "red", "orange" ] }
+    },
+
+    "CompGridCaption" :{
+        "inheritProperties" : true,
+        "StatusPan": {
+            "view" : {
+                "*"       : { "@zebkit.draw.ArrowView" : [ "left", "rgb(255, 153, 0)" ], "width" : 9, "height" : 9  },
+                "ascent"  : { "@zebkit.draw.ArrowView" : [ "top", "rgb(255, 153, 0)"  ]   },
+                "descent" : { "@zebkit.draw.ArrowView" : [ "bottom", "rgb(255, 153, 0)" ] }
+            }
+        },
+
+        "TitlePan": {
+            "padding":6
+        },
+
+        "Link": {
+            "inheritProperties" : true,
+            "colors": {
+                "pressed.over" : "orange",
+                "out"          : "white",
+                "over"         : "orange",
+                "pressed.out"  : "white",
+                "disabled"     : "gray"
+            }
+        }
+    },
+
+    "LeftCompGridCaption" :{
+        "inheritProperties" : true,
+        "background": { "@zebkit.draw.Gradient" : [ "red", "orange", "horizontal"] }
+    },
+
+    "GridCaption" :{
+        "inheritProperties" : true,
+        "padding"  : 4,
+        "font"     : "%{zebkit.ui.boldFont}",
+        "color"    : "white"
+    },
+
+    "LeftGridCaption" :{
+        "inheritProperties" : true
+    },
+
+    "Grid": {
+        "DefViews" : {
+            "color": "white"
+        },
+
+        "CornerPan" : {
+            "inheritProperties" : true,
+            "background": { "@zebkit.draw.Gradient": [ "red", "orange", "horizontal"] }
+        },
+
+        "views" : {
+            "focusOnSelect"  : "red",
+            "focusOffSelect" : "red"
+        },
+
+        "lineColor": "white",
+        "lineSize" : 1
+    }
+}

@@ -43,6 +43,12 @@ pjax = new Y.Pjax({
             callbacks: defaultRoute
         },
 
+        // -- /elements/* -------------------------------------------------------
+        {
+            path     : '/elements/:element.html*',
+            callbacks: defaultRoute
+        },
+
         // -- /classes/* -------------------------------------------------------
         {
             path     : '/classes/:class.html*',
@@ -167,7 +173,7 @@ pjax.initLineNumbers = function () {
 };
 
 pjax.initRoot = function () {
-    var terminators = /^(?:classes|files|modules)$/,
+    var terminators = /^(?:classes|files|elements|modules)$/,
         parts       = pjax._getPathRoot().split('/'),
         root        = [],
         i, len, part;
@@ -193,15 +199,13 @@ pjax.updateTabState = function (src) {
 
     function scrollToNode() {
         if (node.hasClass('protected')) {
-            // TODO: original code was commented 
-            // Y.one('#api-show-protected').set('checked', true);
-            // pjax.updateVisibility();
+            Y.one('#api-show-protected').set('checked', true);
+            pjax.updateVisibility();
         }
 
         if (node.hasClass('private')) {
-            // TODO: original code was commented
-            // Y.one('#api-show-private').set('checked', true);
-            // pjax.updateVisibility();
+            Y.one('#api-show-private').set('checked', true);
+            pjax.updateVisibility();
         }
 
         setTimeout(function () {
@@ -265,32 +269,17 @@ pjax.updateTabState = function (src) {
 pjax.updateVisibility = function () {
     var container = pjax.get('container');
 
-    var e = Y.one('#api-show-inherited');
-    if (e) {
-        container.toggleClass('hide-inherited',!e.get('checked'));
-    }
+    container.toggleClass('hide-inherited',
+            !Y.one('#api-show-inherited').get('checked'));
 
-    e = Y.one('#api-show-deprecated');
-    if (e) {
-        container.toggleClass('show-deprecated', e.get('checked'));
-    }
+    container.toggleClass('show-deprecated',
+            Y.one('#api-show-deprecated').get('checked'));
 
+    container.toggleClass('show-protected',
+            Y.one('#api-show-protected').get('checked'));
 
-    // TODO: switch on showing protected and private methods and fields
-    container.toggleClass('show-protected', true);
-    container.toggleClass('show-private', true);
-
-
-
-    e = Y.one('#api-show-protected');
-    if (e) {
-        container.toggleClass('show-protected', e.get('checked'));
-    }
-
-    e = Y.one('#api-show-private');
-    if (e) {
-        container.toggleClass('show-private', e.get('checked'));
-    }
+    container.toggleClass('show-private',
+            Y.one('#api-show-private').get('checked'));
 
     pjax.checkVisibility();
 };
@@ -301,7 +290,7 @@ pjax.handleClasses = function (req, res, next) {
     var status = res.ioResponse.status;
 
     // Handles success and local filesystem XHRs.
-    if (!status || (status >= 200 && status < 300)) {
+    if (res.ioResponse.readyState === 4 && (!status || (status >= 200 && status < 300))) {
         pjax.initClassTabView();
     }
 
@@ -312,7 +301,7 @@ pjax.handleFiles = function (req, res, next) {
     var status = res.ioResponse.status;
 
     // Handles success and local filesystem XHRs.
-    if (!status || (status >= 200 && status < 300)) {
+    if (res.ioResponse.readyState === 4 && (!status || (status >= 200 && status < 300))) {
         pjax.initLineNumbers();
     }
 
@@ -378,8 +367,7 @@ pjax.updateVisibility();
 
 Y.APIList.rootPath = pjax.get('root');
 
-var o = Y.one('#api-options'); 
-if (o) o.delegate('click', pjax.onOptionClick, 'input');
+Y.one('#api-options').delegate('click', pjax.onOptionClick, 'input');
 
 Y.on('hashchange', function (e) {
     pjax.updateTabState('hashchange');

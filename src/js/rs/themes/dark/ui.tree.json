@@ -1,0 +1,77 @@
+{
+    "DefViews": {
+        "color" : "%{zebkit.palette.gray}",
+        "font"  : "12px 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+    },
+
+    "BaseTree" : {
+        "lineColor" : "red",
+        "color"     : "red",
+        "itemGapX"  : 4,
+        "itemGapY"  : 4,
+        "views": {
+            "leafSign"     : null,
+            "collapsedSign": null,
+            "expandedSign" : null,
+
+            "collapsedToggle"     : { "@zebkit.draw.ArrowView":  [  "right", "orange", 10 , 14] },
+            "expandedToggle"      : { "@zebkit.draw.ArrowView":  [ "bottom", "orange", 14, 10 ] },
+
+            "focusOnSelect"  : { "@zebkit.draw.Border" : [ "orange", 2, 6 ] },
+            "focusOffSelect" : { "@zebkit.draw.Border" : [ "gray", 2, 6 ]   }
+        }
+    },
+
+    "DefViews" : {
+        "color" : "red",
+        "font"  : "bold"
+    },
+
+    "Tree": {
+        "inheritProperties" : true
+    },
+
+    "CompTree": {
+        "Checkbox" : {
+            "inheritProperties" : true,
+            "Label"   : {
+                "color"   : "red",
+                "font"    : "bold"
+            }
+        },
+
+        "Combo" : {
+            "inheritProperties" : true,
+            "background" : null,
+            "border"     : "plain",
+            "CompList" : {
+                "Label" : {
+                    "font" : "bold",
+                    "color" : "red"
+                },
+
+                "views" :  {
+                    "select"    : { "@zebkit.draw.Border" : ["white", 2, 6 ] },
+                    "topMarker" : null,
+                    "marker"    : [  [ { "@zebkit.draw.Border" : [ null, 0, 6 ] }, { "@zebkit.draw.Gradient" : ["white", "lightGray" ] } ] ]
+                }
+
+            },
+            "List" : {
+                "ViewProvider" : {
+                    "font" : "bold",
+                    "color": "red"
+                }
+            }
+        },
+
+        "Label" : {
+            "inheritProperties" : true,
+            "color"   : "red",
+            "font"    : "bold",
+            "padding" : 4
+        },
+
+        "inheritProperties" : true
+    }
+}

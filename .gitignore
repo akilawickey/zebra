@@ -1,4 +1,6 @@
-tests/io/*.pyc
 node_modules
+build
+local
+snippets
 *.zip
 *.log
